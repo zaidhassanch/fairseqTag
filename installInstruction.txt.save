@@ -1,0 +1,21 @@
+pip install --editable ./
+
+using the ~/env/bin/activate environment
+
+Run test:
+fairseq-train     data-bin/wmt16_en_de_bpe32k     --arch transformer_wmt_en_de --share-all-embeddings     --optimizer adam --adam-betas '(0.9, 0.98)' --clip-norm 0.0     --lr 0.0005 --lr-scheduler inverse_sqrt --warmup-updates 4000 --warmup-init-lr 1e-07     --dropout 0.3 --weight-decay 0.0     --criterion label_smoothed_cross_entropy --label-smoothing 0.1     --max-tokens 100     --fp16
+
+
+Sequence:
+cd fairseq*******Transformer/
+pip3 install --editable ./
+cd ..
+fairseq-train     data-bin/wmt16_en_de_bpe32k     --arch transformer_wmt_en_de --share-all-embeddings     --optimizer adam --adam-betas '(0.9, 0.98)' --clip-norm 0.0     --lr 0.0005 --lr-scheduler inverse_sqrt --warmup-updates 4000 --warmup-init-lr 1e-07     --dropout 0.3 --weight-decay 0.0     --criterion label_smoothed_cross_entropy --label-smoothing 0.1     --max-tokens 100     --fp16 --tensorboard-logdir mytensor/ --seed 1234 --no-progress-bar
+
+datadownload:
+gdown https://drive.google.com/uc?id=FILE_ID
+	- FILE_ID: from download link, this is a short token
+
+
+fairseq-train     data-bin/multi30k_bpe_en_de_5k/     --arch transformer_wmt_en_de    --optimizer adam --clip-norm 1.0     --lr 3e-4    --criterion cross_entropy     --max-tokens 160     --fp16 --tensorboard-logdir mytensor/ --seed 1234 --max-epoch 1
+
