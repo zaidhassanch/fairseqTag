@@ -41,7 +41,7 @@ from fairseq.file_io import PathManager
 from fairseq.logging import meters, metrics, progress_bar
 from fairseq.model_parallel.megatron_trainer import MegatronTrainer
 from fairseq.trainer import Trainer
-from fairseq_cli.translate_selected import translate_sents
+# from fairseq_cli.translate_selected import translate_sents
 from omegaconf import DictConfig, OmegaConf
 
 
@@ -303,7 +303,7 @@ def train(
                 fw_loss.write(str(log_output["loss"]) + "," + str(stats["loss"]) + "," + str(log_output["nll_loss"])
                               + "," + str(stats["nll_loss"])
                               + "\n")
-                translate_sents(trainer.cfg, trainer.model)
+                # translate_sents(trainer.cfg, trainer.model)
                 # reset mid-epoch stats after each log interval
                 # the end-of-epoch stats will still be preserved
                 metrics.reset_meters("train_inner")
