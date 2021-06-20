@@ -21,3 +21,7 @@ fairseq-train     data-bin/multi30k_bpe_en_de_5k/     --arch transformer_wmt_en_
 
 In pycharm:
 "(0.9,0.98)"
+
+creating python3 virtual env on vector:
+virtualenv -p python3 full
+source full/bin/activate
