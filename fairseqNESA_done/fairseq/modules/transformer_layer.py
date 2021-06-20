@@ -31,7 +31,6 @@ class TransformerEncoderLayer(nn.Module):
 
     def __init__(self, args):
         super().__init__()
-        print("Removing encoder self attention layer")
 
         self.args = args
         self.embed_dim = args.encoder_embed_dim
