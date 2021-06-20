@@ -187,12 +187,12 @@ class TransformerDecoderLayer(nn.Module):
 
         self.cross_self_attention = getattr(args, "cross_self_attention", False)
 
-        self.self_attn = self.build_self_attention(
-            self.embed_dim,
-            args,
-            add_bias_kv=add_bias_kv,
-            add_zero_attn=add_zero_attn,
-        )
+        # self.self_attn = self.build_self_attention(
+        #     self.embed_dim,
+        #     args,
+        #     add_bias_kv=add_bias_kv,
+        #     add_zero_attn=add_zero_attn,
+        # )
 
         self.activation_fn = utils.get_activation_fn(
             activation=str(args.activation_fn)
@@ -315,31 +315,31 @@ class TransformerDecoderLayer(nn.Module):
             if len(prev_self_attn_state) >= 3:
                 saved_state["prev_key_padding_mask"] = prev_self_attn_state[2]
             assert incremental_state is not None
-            self.self_attn._set_input_buffer(incremental_state, saved_state)
-        _self_attn_input_buffer = self.self_attn._get_input_buffer(incremental_state)
-        if self.cross_self_attention and not (
-            incremental_state is not None
-            and _self_attn_input_buffer is not None
-            and "prev_key" in _self_attn_input_buffer
-        ):
-            if self_attn_mask is not None:
-                assert encoder_out is not None
-                self_attn_mask = torch.cat(
-                    (x.new_zeros(x.size(0), encoder_out.size(0)), self_attn_mask), dim=1
-                )
-            if self_attn_padding_mask is not None:
-                if encoder_padding_mask is None:
-                    assert encoder_out is not None
-                    encoder_padding_mask = self_attn_padding_mask.new_zeros(
-                        encoder_out.size(1), encoder_out.size(0)
-                    )
-                self_attn_padding_mask = torch.cat(
-                    (encoder_padding_mask, self_attn_padding_mask), dim=1
-                )
-            assert encoder_out is not None
-            y = torch.cat((encoder_out, x), dim=0)
-        else:
-            y = x
+            # self.self_attn._set_input_buffer(incremental_state, saved_state)
+        # _self_attn_input_buffer = self.self_attn._get_input_buffer(incremental_state)
+        # if self.cross_self_attention and not (
+        #     incremental_state is not None
+        #     and _self_attn_input_buffer is not None
+        #     and "prev_key" in _self_attn_input_buffer
+        # ):
+        #     if self_attn_mask is not None:
+        #         assert encoder_out is not None
+        #         self_attn_mask = torch.cat(
+        #             (x.new_zeros(x.size(0), encoder_out.size(0)), self_attn_mask), dim=1
+        #         )
+        #     if self_attn_padding_mask is not None:
+        #         if encoder_padding_mask is None:
+        #             assert encoder_out is not None
+        #             encoder_padding_mask = self_attn_padding_mask.new_zeros(
+        #                 encoder_out.size(1), encoder_out.size(0)
+        #             )
+        #         self_attn_padding_mask = torch.cat(
+        #             (encoder_padding_mask, self_attn_padding_mask), dim=1
+        #         )
+        #     assert encoder_out is not None
+        #     y = torch.cat((encoder_out, x), dim=0)
+        # else:
+        #     y = x
 
         # x, attn = self.self_attn(
         #     query=x,
