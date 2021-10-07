@@ -407,6 +407,7 @@ class TransformerEncoder(FairseqEncoder):
         else:
             self.layer_norm = None
 
+
     def build_encoder_layer(self, args):
         layer = TransformerEncoderLayer(args)
         checkpoint = getattr(args, "checkpoint_activations", False)
@@ -508,6 +509,9 @@ class TransformerEncoder(FairseqEncoder):
                   Only populated if *return_all_hiddens* is True.
         """
         # compute padding mask
+
+        # print("src_tokens", src_tokens.shape)
+
         encoder_padding_mask = src_tokens.eq(self.padding_idx)
         has_pads = src_tokens.device.type == "xla" or encoder_padding_mask.any()
 

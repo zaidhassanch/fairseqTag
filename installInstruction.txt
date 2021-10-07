@@ -19,6 +19,9 @@ gdown https://drive.google.com/uc?id=FILE_ID
 Multi30k specific:
 fairseq-train     data-bin/multi30k_bpe_en_de_5k/     --arch transformer_wmt_en_de    --optimizer adam --clip-norm 1.0     --lr 3e-4    --criterion cross_entropy     --max-tokens 160     --fp16 --tensorboard-logdir mytensor/ --seed 1234 --max-epoch 1
 
+fairseq-train     data-bin/iwslt14.rdrop.tokenized.de-en/     --arch transformer_iwslt_de_en    --optimizer adam --clip-norm 1.0     --lr 3e-4    --criterion label_smoothed_cross_entropy --label-smoothing 0.1     --max-tokens 160     --fp16 --tensorboard-logdir mytensor/ --seed 1234 --max-epoch 1
+
+
 In pycharm:
 "(0.9,0.98)"
 

@@ -13,6 +13,8 @@ from fairseq.modules.fairseq_dropout import FairseqDropout
 from fairseq.modules.quant_noise import quant_noise
 from torch import Tensor
 
+from fairseq.modules.my_fc2 import myFC2
+
 
 class TransformerEncoderLayer(nn.Module):
     """Encoder layer block.
@@ -67,15 +69,20 @@ class TransformerEncoderLayer(nn.Module):
 
         self.final_layer_norm = LayerNorm(self.embed_dim, export=export)
 
+        print("TransformerEncoderLayer created")
+
     def build_fc1(self, input_dim, output_dim, q_noise, qn_block_size):
-        return quant_noise(
-            nn.Linear(input_dim, output_dim), p=q_noise, block_size=qn_block_size
-        )
+        # return quant_noise(
+        #     nn.Linear(input_dim, output_dim), p=q_noise, block_size=qn_block_size
+        # )
+
+        return myFC2(input_dim, output_dim)
 
     def build_fc2(self, input_dim, output_dim, q_noise, qn_block_size):
-        return quant_noise(
-            nn.Linear(input_dim, output_dim), p=q_noise, block_size=qn_block_size
-        )
+        # return quant_noise(
+        #     nn.Linear(input_dim, output_dim), p=q_noise, block_size=qn_block_size
+        # )
+        return myFC2(input_dim, output_dim)
 
     def build_self_attention(self, embed_dim, args):
         return MultiheadAttention(
