@@ -72,17 +72,14 @@ class TransformerEncoderLayer(nn.Module):
         print("TransformerEncoderLayer created")
 
     def build_fc1(self, input_dim, output_dim, q_noise, qn_block_size):
-        # return quant_noise(
-        #     nn.Linear(input_dim, output_dim), p=q_noise, block_size=qn_block_size
-        # )
-
-        return myFC2(input_dim, output_dim)
+        return quant_noise(
+            nn.Linear(input_dim, output_dim), p=q_noise, block_size=qn_block_size
+        )
 
     def build_fc2(self, input_dim, output_dim, q_noise, qn_block_size):
-        # return quant_noise(
-        #     nn.Linear(input_dim, output_dim), p=q_noise, block_size=qn_block_size
-        # )
-        return myFC2(input_dim, output_dim)
+        return quant_noise(
+            nn.Linear(input_dim, output_dim), p=q_noise, block_size=qn_block_size
+        )
 
     def build_self_attention(self, embed_dim, args):
         return MultiheadAttention(
